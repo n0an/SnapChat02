@@ -8,23 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		18491F031DEDF21400103725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F021DEDF21400103725 /* AppDelegate.swift */; };
-		18491F051DEDF21400103725 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F041DEDF21400103725 /* ViewController.swift */; };
 		18491F081DEDF21400103725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F061DEDF21400103725 /* Main.storyboard */; };
 		18491F0A1DEDF21400103725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18491F091DEDF21400103725 /* Assets.xcassets */; };
 		18491F0D1DEDF21400103725 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F0B1DEDF21400103725 /* LaunchScreen.storyboard */; };
 		18491F151DEDF63200103725 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18491F141DEDF63200103725 /* GoogleService-Info.plist */; };
+		18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C6FC1DEDFF9D000DD6B6 /* InboxViewController.swift */; };
+		18A2C6FF1DEE0138000DD6B6 /* GeneralHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C6FE1DEE0138000DD6B6 /* GeneralHelper.swift */; };
+		18A2C7031DEE026E000DD6B6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C7021DEE026E000DD6B6 /* WelcomeViewController.swift */; };
+		18A2C7051DEE0316000DD6B6 /* SignupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C7041DEE0316000DD6B6 /* SignupTableViewController.swift */; };
+		18A2C7081DEE0513000DD6B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C7071DEE0513000DD6B6 /* LoginViewController.swift */; };
+		18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70B1DEE059C000DD6B6 /* User.swift */; };
+		18A2C70E1DEE0757000DD6B6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70D1DEE0757000DD6B6 /* DataService.swift */; };
+		18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70F1DEE0952000DD6B6 /* AuthService.swift */; };
 		727AF2669FFF39BF9A9D8A5D /* Pods_SnappyChatty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18491EFF1DEDF21400103725 /* SnappyChatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnappyChatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18491F021DEDF21400103725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18491F041DEDF21400103725 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		18491F071DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18491F091DEDF21400103725 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18491F0C1DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18491F0E1DEDF21400103725 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18491F141DEDF63200103725 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		18A2C6FC1DEDFF9D000DD6B6 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		18A2C6FE1DEE0138000DD6B6 /* GeneralHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralHelper.swift; sourceTree = "<group>"; };
+		18A2C7021DEE026E000DD6B6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		18A2C7041DEE0316000DD6B6 /* SignupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupTableViewController.swift; sourceTree = "<group>"; };
+		18A2C7071DEE0513000DD6B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		18A2C70B1DEE059C000DD6B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		18A2C70D1DEE0757000DD6B6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		18A2C70F1DEE0952000DD6B6 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnappyChatty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64606941F53D4CBC3C3CC92D /* Pods-SnappyChatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.debug.xcconfig"; sourceTree = "<group>"; };
 		EC152AE8F10872D8B67E3313 /* Pods-SnappyChatty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,14 +78,61 @@
 			isa = PBXGroup;
 			children = (
 				18491F021DEDF21400103725 /* AppDelegate.swift */,
-				18491F041DEDF21400103725 /* ViewController.swift */,
+				18A2C7111DEE1502000DD6B6 /* Services */,
+				18A2C7001DEE014A000DD6B6 /* Helper Classes */,
+				18A2C7121DEE150E000DD6B6 /* Model */,
+				18A2C7011DEE0153000DD6B6 /* Controller */,
 				18491F061DEDF21400103725 /* Main.storyboard */,
-				18491F141DEDF63200103725 /* GoogleService-Info.plist */,
+				18A2C7061DEE0488000DD6B6 /* User Authentication */,
 				18491F091DEDF21400103725 /* Assets.xcassets */,
 				18491F0B1DEDF21400103725 /* LaunchScreen.storyboard */,
 				18491F0E1DEDF21400103725 /* Info.plist */,
+				18491F141DEDF63200103725 /* GoogleService-Info.plist */,
 			);
 			path = SnappyChatty;
+			sourceTree = "<group>";
+		};
+		18A2C7001DEE014A000DD6B6 /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C6FE1DEE0138000DD6B6 /* GeneralHelper.swift */,
+			);
+			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		18A2C7011DEE0153000DD6B6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C6FC1DEDFF9D000DD6B6 /* InboxViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		18A2C7061DEE0488000DD6B6 /* User Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C7021DEE026E000DD6B6 /* WelcomeViewController.swift */,
+				18A2C7041DEE0316000DD6B6 /* SignupTableViewController.swift */,
+				18A2C7071DEE0513000DD6B6 /* LoginViewController.swift */,
+			);
+			name = "User Authentication";
+			sourceTree = "<group>";
+		};
+		18A2C7111DEE1502000DD6B6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C70D1DEE0757000DD6B6 /* DataService.swift */,
+				18A2C70F1DEE0952000DD6B6 /* AuthService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		18A2C7121DEE150E000DD6B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18A2C70B1DEE059C000DD6B6 /* User.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		C7E75299EA33351A5E06F294 /* Frameworks */ = {
@@ -216,8 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18491F051DEDF21400103725 /* ViewController.swift in Sources */,
+				18A2C70E1DEE0757000DD6B6 /* DataService.swift in Sources */,
+				18A2C7081DEE0513000DD6B6 /* LoginViewController.swift in Sources */,
+				18A2C6FF1DEE0138000DD6B6 /* GeneralHelper.swift in Sources */,
+				18A2C7031DEE026E000DD6B6 /* WelcomeViewController.swift in Sources */,
+				18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */,
+				18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */,
+				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
 				18491F031DEDF21400103725 /* AppDelegate.swift in Sources */,
+				18A2C7051DEE0316000DD6B6 /* SignupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
