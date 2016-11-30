@@ -21,6 +21,7 @@
 		18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70B1DEE059C000DD6B6 /* User.swift */; };
 		18A2C70E1DEE0757000DD6B6 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70D1DEE0757000DD6B6 /* DataService.swift */; };
 		18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70F1DEE0952000DD6B6 /* AuthService.swift */; };
+		18AD93A91DEF665A00094421 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD93A81DEF665A00094421 /* UserCell.swift */; };
 		727AF2669FFF39BF9A9D8A5D /* Pods_SnappyChatty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		18A2C70B1DEE059C000DD6B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		18A2C70D1DEE0757000DD6B6 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		18A2C70F1DEE0952000DD6B6 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		18AD93A81DEF665A00094421 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnappyChatty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64606941F53D4CBC3C3CC92D /* Pods-SnappyChatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.debug.xcconfig"; sourceTree = "<group>"; };
 		EC152AE8F10872D8B67E3313 /* Pods-SnappyChatty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				18A2C6FC1DEDFF9D000DD6B6 /* InboxViewController.swift */,
 				1837D22E1DEF57930035E9F8 /* EditFriendsTableViewController.swift */,
+				18AD93A81DEF665A00094421 /* UserCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
 				1837D22F1DEF57930035E9F8 /* EditFriendsTableViewController.swift in Sources */,
 				18491F031DEDF21400103725 /* AppDelegate.swift in Sources */,
+				18AD93A91DEF665A00094421 /* UserCell.swift in Sources */,
 				18A2C7051DEE0316000DD6B6 /* SignupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -54,7 +54,18 @@ class User {
 
 
 
-
+extension User {
+    
+    func follow(user: User) {
+        self.friends.append(user)
+        
+        let ref = DataService.instance.REF_USERS.child(uid).child("friends/\(user.uid)")
+        ref.setValue(true)
+        
+    }
+    
+    
+}
 
 
 

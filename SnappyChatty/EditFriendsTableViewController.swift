@@ -18,6 +18,8 @@ class EditFriendsTableViewController: UITableViewController {
     var users = [User]()
     var selectedUsers = [String: User]()
 //    var selectedUsers = [User]()
+    
+    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +96,16 @@ class EditFriendsTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let user = self.users[indexPath.row]
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        
+        
+        
         
         
         

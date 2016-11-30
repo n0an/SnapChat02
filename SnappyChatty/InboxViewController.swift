@@ -19,6 +19,8 @@ class InboxViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         if FIRAuth.auth()?.currentUser == nil {
             performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
         }
