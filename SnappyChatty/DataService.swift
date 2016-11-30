@@ -9,7 +9,9 @@
 import Foundation
 import Firebase
 
-let FIR_CHILD_USERS = "users"
+
+let DB_ROOT =       FIRDatabase.database().reference()
+let STORAGE_ROOT =  FIRStorage.storage().reference()
 
 class DataService {
     
@@ -19,14 +21,20 @@ class DataService {
         return _instance
     }
     
-    var mainRef: FIRDatabaseReference {
-        return FIRDatabase.database().reference()
-        
-    }
+    var REF_BASE =      DB_ROOT
+    var REF_USERS =     DB_ROOT.child("users")
+    var REF_MESSAGES =  DB_ROOT.child("messages")
     
-    var userRef: FIRDatabaseReference {
-        return mainRef.child(FIR_CHILD_USERS)
-    }
+    
+    
+//    var mainRef: FIRDatabaseReference {
+//        return FIRDatabase.database().reference()
+//        
+//    }
+    
+//    var userRef: FIRDatabaseReference {
+//        return mainRef.child(FIR_CHILD_USERS)
+//    }
     
     
     

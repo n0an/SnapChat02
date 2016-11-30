@@ -44,7 +44,7 @@ class User {
         
         let dataService = DataService.instance
         
-        let ref = dataService.userRef.child(uid)
+        let ref = dataService.REF_USERS.child(uid)
         ref.setValue(toDictionary())
         
         

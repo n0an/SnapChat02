@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1837D22F1DEF57930035E9F8 /* EditFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1837D22E1DEF57930035E9F8 /* EditFriendsTableViewController.swift */; };
 		18491F031DEDF21400103725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F021DEDF21400103725 /* AppDelegate.swift */; };
 		18491F081DEDF21400103725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F061DEDF21400103725 /* Main.storyboard */; };
 		18491F0A1DEDF21400103725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18491F091DEDF21400103725 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1837D22E1DEF57930035E9F8 /* EditFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFriendsTableViewController.swift; sourceTree = "<group>"; };
 		18491EFF1DEDF21400103725 /* SnappyChatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnappyChatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18491F021DEDF21400103725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18491F071DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				18A2C6FC1DEDFF9D000DD6B6 /* InboxViewController.swift */,
+				1837D22E1DEF57930035E9F8 /* EditFriendsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */,
 				18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */,
 				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
+				1837D22F1DEF57930035E9F8 /* EditFriendsTableViewController.swift in Sources */,
 				18491F031DEDF21400103725 /* AppDelegate.swift in Sources */,
 				18A2C7051DEE0316000DD6B6 /* SignupTableViewController.swift in Sources */,
 			);

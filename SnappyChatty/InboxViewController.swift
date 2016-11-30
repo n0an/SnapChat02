@@ -22,9 +22,22 @@ class InboxViewController: UITableViewController {
         if FIRAuth.auth()?.currentUser == nil {
             performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
         }
+        
+        
+        
+        
+    }
+    
+    
+    @IBAction func actionLogoutTapped() {
+    
+        try! FIRAuth.auth()?.signOut()
+        
+//        self.tabBarController?.selectedIndex = 0
+        performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
 
-        
-        
+    
+    
     }
 
     
