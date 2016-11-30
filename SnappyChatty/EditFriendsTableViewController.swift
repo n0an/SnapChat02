@@ -16,6 +16,8 @@ class EditFriendsTableViewController: UITableViewController {
     }
     
     var users = [User]()
+    var selectedUsers = [String: User]()
+//    var selectedUsers = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +56,12 @@ class EditFriendsTableViewController: UITableViewController {
         })
         
     }
+    
+    
 
     
     
-    
+    // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -74,9 +78,27 @@ class EditFriendsTableViewController: UITableViewController {
         
         userCell.textLabel?.text = user.username
         
+        
+        if selectedUsers.index(forKey: user.uid) != nil {
+            userCell.accessoryType = .checkmark
+        } else {
+            userCell.accessoryType = .none
+        }
+        
+        
+        
         return userCell
     }
     
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+        
+    }
     
     
     
