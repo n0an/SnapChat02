@@ -17,7 +17,7 @@ class User {
     var username: String
     var fullName: String
     
-    var friends: [String]
+    var friends: [String: Bool]
     
     
     var userRef: FIRDatabaseReference
@@ -27,7 +27,13 @@ class User {
     init(uid: String, username: String, fullName: String, friends: [String]) {
         self.uid =      uid
         self.username = username
-        self.friends =  friends
+        
+        self.friends = [:]
+        
+        for friend in friends {
+            self.friends[friend] = true
+        }
+        
         self.fullName = fullName
         
         userRef = DataService.instance.REF_USERS.child(self.uid)
@@ -42,17 +48,21 @@ class User {
         self.username = dictionary["username"] as! String
         self.fullName = dictionary["fullName"] as! String
         
-        self.friends = []
+        self.friends = [:]
         
-        if let friendsDict = dictionary["friends"] as? [String: Any] {
-            
-            for (key, _) in friendsDict {
-                
-                self.friends.append(key)
-                
-            }
-            
+        if let friendsDict = dictionary["friends"] as? [String: Bool] {
+            self.friends = friendsDict
         }
+        
+//        if let friendsDict = dictionary["friends"] as? [String: Any] {
+//            
+//            for (key, ) in friendsDict {
+//                
+//                self.friends.append(key)
+//                
+//            }
+//            
+//        }
         
         userRef = DataService.instance.REF_USERS.child(self.uid)
         
@@ -66,6 +76,16 @@ class User {
             "fullName": fullName
         ]
         
+        
+    }
+    
+    func isFriendWith(user: User) -> Bool {
+        
+        if self.friends.index(forKey: user.uid) != nil {
+            return true
+        } else {
+            return false
+        }
         
     }
     
@@ -95,12 +115,19 @@ class User {
 extension User {
     
     func addFriend(user: String) {
-        self.friends.append(user)
+        self.friends.updateValue(true, forKey: user)
         
-        userRef.setValue(true)
+        userRef.child("\(FRIENDS_REF)/\(user)").setValue(true)
         
     }
     
+    
+    func removeFriend(user: String) {
+        self.friends.removeValue(forKey: user)
+        
+        userRef.child("\(FRIENDS_REF)/\(user)").removeValue()
+        
+    }
     
 }
 

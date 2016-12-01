@@ -16,14 +16,13 @@ class EditFriendsTableViewController: UITableViewController {
     }
     
     var users = [User]()
-    var selectedUsers = [String: User]()
-//    var selectedUsers = [User]()
+    var selectedUsers = [String: Bool]()
     
-    var currentUser: User?
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: {
             snapshot in
             
@@ -44,7 +43,7 @@ class EditFriendsTableViewController: UITableViewController {
                         }
                         
                     }
-
+                    
                     
                 }
                 
@@ -53,14 +52,14 @@ class EditFriendsTableViewController: UITableViewController {
                 
                 
             }
-     
-        
+            
+            
         })
         
     }
     
     
-
+    
     
     
     // MARK: - UITableViewDataSource
@@ -81,11 +80,26 @@ class EditFriendsTableViewController: UITableViewController {
         userCell.textLabel?.text = user.username
         
         
-        if selectedUsers.index(forKey: user.uid) != nil {
+        if AuthService.instance.currentUser.isFriendWith(user: user) {
             userCell.accessoryType = .checkmark
         } else {
             userCell.accessoryType = .none
+            
         }
+        
+        
+        //        let currentUserId = AuthService.instance.currentUser.uid
+        //        DataService.instance.REF_USERS.child(currentUserId).child(FRIENDS_REF).child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+        //
+        //            if let _ = snapshot.value as? NSNull {
+        //                userCell.accessoryType = .none
+        //            } else {
+        //                userCell.accessoryType = .checkmark
+        //            }
+        //
+        //
+        //
+        //        })
         
         
         
@@ -101,10 +115,34 @@ class EditFriendsTableViewController: UITableViewController {
         
         let user = self.users[indexPath.row]
         
-        let cell = tableView.cellForRow(at: indexPath)
+        if !AuthService.instance.currentUser.isFriendWith(user: user) {
+            
+            AuthService.instance.currentUser.addFriend(user: user.uid)
+            
+        } else {
+            AuthService.instance.currentUser.removeFriend(user: user.uid)
+            
+        }
+        
+        tableView.reloadData()
         
         
         
+        //        let currentUserId = AuthService.instance.currentUser.uid
+        //        DataService.instance.REF_USERS.child(currentUserId).child(FRIENDS_REF).child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+        //
+        //            if let _ = snapshot.value as? NSNull {
+        //                AuthService.instance.currentUser.addFriend(user: user.uid)
+        //
+        //            } else {
+        //                AuthService.instance.currentUser.removeFriend(user: user.uid)
+        //
+        //
+        //            }
+        //
+        //
+        //
+        //        })
         
         
         
@@ -128,5 +166,5 @@ class EditFriendsTableViewController: UITableViewController {
     
     
     
-
+    
 }
