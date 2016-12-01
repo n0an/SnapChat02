@@ -12,7 +12,6 @@ import Firebase
 
 let DB_ROOT         = FIRDatabase.database().reference()
 let FRIENDS_REF     = "friends"
-let MESSAGE_REF     = "messages"
 let RECIPIENTS_REF  = "recipients"
 
 class DataService {

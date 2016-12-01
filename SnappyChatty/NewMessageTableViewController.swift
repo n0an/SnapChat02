@@ -10,6 +10,11 @@ import UIKit
 
 class NewMessageTableViewController: FriendsTableViewController {
     
+    enum MessageMediaType {
+        case Video
+        case Image
+    }
+    
     var mediaPickerHelper: MediaPickerHelper!
     
     var image: UIImage?
@@ -66,6 +71,33 @@ class NewMessageTableViewController: FriendsTableViewController {
     
     func sendVideoMessage(withVideoURL videoURL: URL) {
         
+        let firVideo = FIRVideo(videoURL: videoURL)
+        
+        firVideo.saveToFirebaseStorage { (meta, error) in
+            
+            if error != nil {
+                print("===NAG=== Unable to upload video to Firebase Storage")
+
+            } else {
+                print("===NAG=== Successfully video uploaded to Firebase Storage")
+
+                let downloadURL = meta?.downloadURL()?.absoluteString
+                
+                if let url = downloadURL {
+                    
+//                    self.postMessage(withVideoURL: url)
+                    self.postMessage(withMediaURLString: url, andMediaType: .Video)
+
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
     }
     
     func sendImageMessage(withImage image: UIImage) {
@@ -80,13 +112,13 @@ class NewMessageTableViewController: FriendsTableViewController {
 
             } else {
                 print("===NAG=== Successfully image uploaded to Firebase Storage")
-
                 
                 let downloadURL = meta?.downloadURL()?.absoluteString // URL for this image in storage
                 
                 if let url = downloadURL {
                     
-                    self.postMessage(withURL: url)
+//                    self.postMessage(withImageURL: url)
+                    self.postMessage(withMediaURLString: url, andMediaType: .Image)
                     
                 }
                 
@@ -99,7 +131,17 @@ class NewMessageTableViewController: FriendsTableViewController {
         
     }
     
-    func postMessage(withURL imageURL: String) {
+    func postMessage(withMediaURLString urlString: String, andMediaType mediaType: MessageMediaType) {
+        var type: String
+        
+        switch mediaType {
+        case .Video:
+            type = "video"
+            
+        case .Image:
+            type = "image"
+            
+        }
         
         var rec = [String]()
         
@@ -107,22 +149,53 @@ class NewMessageTableViewController: FriendsTableViewController {
             rec.append(recipient.key)
         }
         
-        let message = Message(type: "image", recipients: rec, mediaURL: imageURL)
+        let message = Message(type: type, recipients: rec, mediaURL: urlString)
         
         message.save { (error) in
             
             if error != nil {
                 print("===NAG=== Error adding message to Firebase Database")
-
+                
             } else {
-                print("===NAG=== Message with Image has been saved to Firebase Database")
-
+                print("===NAG=== Message with \(type) media has been saved to Firebase Database")
+                
             }
             
         }
         
         
+        
     }
+    
+//    func postMessage(withVideoURL videoURL: String) {
+//        
+//    }
+//
+//    
+//    func postMessage(withImageURL imageURL: String) {
+//        
+//        var rec = [String]()
+//        
+//        for recipient in recipients {
+//            rec.append(recipient.key)
+//        }
+//        
+//        let message = Message(type: "image", recipients: rec, mediaURL: imageURL)
+//        
+//        message.save { (error) in
+//            
+//            if error != nil {
+//                print("===NAG=== Error adding message to Firebase Database")
+//
+//            } else {
+//                print("===NAG=== Message with Image has been saved to Firebase Database")
+//
+//            }
+//            
+//        }
+//        
+//        
+//    }
     
     
     

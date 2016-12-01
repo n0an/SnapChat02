@@ -13,8 +13,8 @@ import Firebase
 class FIRImage {
     
     var image: UIImage
-    var downloadURL: URL?
-    var downloadLink: String!
+//    var downloadURL: URL?
+//    var downloadLink: String!
     var ref: FIRStorageReference!
     
     init(image: UIImage) {
