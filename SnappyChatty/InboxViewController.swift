@@ -13,8 +13,12 @@ class InboxViewController: UITableViewController {
     
     var currentUser: User!
     
+    var messages = [Message]()
+    
     struct Storyboard {
         static let loginVC = "ShowWelcomeViewController"
+        static let cellID = "Message Cell"
+
     }
     
 
@@ -38,6 +42,9 @@ class InboxViewController: UITableViewController {
                         AuthService.instance.currentUser = self.currentUser
                         
                         // §§ Fetch Messages
+                        
+                        self.fetchMessages()
+                        
                     }
                     
                 })
@@ -49,24 +56,66 @@ class InboxViewController: UITableViewController {
         })
 
         
-   
+        
+    }
+    
+    
+    func fetchMessages() {
+        
+        self.messages = []
+        
+        Message.observeNewMessage { (message) in
+            
+            if !self.messages.contains(message) {
+                self.messages.insert(message, at: 0)
+                self.tableView.reloadData()
+            }
+            
+            
+        }
         
         
         
     }
+    
+    
     
     
     @IBAction func actionLogoutTapped() {
     
         try! FIRAuth.auth()?.signOut()
         
-//        self.tabBarController?.selectedIndex = 0
         performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
 
     
     
     }
+    
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messages.count
+    }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let messageCell = tableView.dequeueReusableCell(withIdentifier: Storyboard.cellID, for: indexPath)
+        
+        let message = self.messages[indexPath.row]
+        
+        messageCell.textLabel?.text = "\((message.createdTime)!)"
+        
+        
+        
+        
+        return messageCell
+        
+    }
     
 
 }

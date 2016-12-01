@@ -11,14 +11,14 @@ import Firebase
 
 class Message {
     
-    var uid: String
+    var uid: String!
     var type: String // "image" or "video"
 
-    var createdTime: String!
+    var createdTime: Double!
 
     var recipients: [String]
     
-    var mediaURL: String!
+    var mediaURL: String
     
     var messageRef: FIRDatabaseReference
     
@@ -40,10 +40,7 @@ class Message {
         
     }
     
-    
-    
-    
-    
+   
     
 //    init(uid: String, type: String, caption: String, createdTime: String, recipients: [User], mediaURL: String) {
 //        
@@ -65,28 +62,49 @@ class Message {
 //        messageRef = DataService.instance.REF_MESSAGES.child(self.uid)
 //        
 //    }
-//    
-//    init(uid: String, dictionary: [String: Any]) {
-//        
-//        self.uid = uid
-//        
-//        self.type = dictionary["type"] as! String
-//        
-//        self.caption = dictionary["caption"] as! String
-//        self.mediaURL = dictionary["mediaURL"] as! String
-//        self.createdTime = dictionary["createdTime"] as! String
-//        
-//        
-//        self.recipients = [:]
-//        
-//        if let recipientsDict = dictionary["recipients"] as? [String: Bool] {
-//            self.recipients = recipientsDict
+    
+    
+    
+    
+    
+    
+    init(uid: String, dictionary: [String: Any]) {
+        
+        self.uid = uid
+        
+        self.type = dictionary["type"] as! String
+        
+//        if let type = dictionary["type"] as? String {
+//            self.type = type
 //        }
-//        
-//        
-//        messageRef = DataService.instance.REF_MESSAGES.child(self.uid)
-//        
-//    }
+        
+        self.mediaURL = dictionary["mediaURL"] as! String
+        
+//        if let mediaURL = dictionary["mediaURL"] as? String {
+//            self.mediaURL = mediaURL
+//        }
+
+        self.createdTime = dictionary["createdTime"] as! Double
+        
+//        if let createdTime = dictionary["createdTime"] as? String {
+//            self.createdTime = createdTime
+//        }
+        
+        
+        
+        self.recipients = []
+        
+        if let recipientsDict = dictionary["recipients"] as? [String: Bool] {
+            
+            for (key, _) in recipientsDict {
+                self.recipients.append(key)
+            }
+            
+        }
+
+        messageRef = DataService.instance.REF_MESSAGES.child(self.uid)
+        
+    }
     
 //    func toDictionary() -> [String: Any] {
 //        
@@ -123,6 +141,49 @@ class Message {
     
     
 }
+
+extension Message {
+    
+    
+    class func observeNewMessage(_ completion: @escaping (Message) -> Void) {
+        
+        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
+            
+            let msg = Message(uid: snapshot.key, dictionary: snapshot.value as! [String: Any])
+            
+            completion(msg)
+
+        
+        
+        })
+        
+        
+    }
+    
+    
+}
+
+// COMPARE METHOD (FOR "CONTAINS" FEATURE) - for checking if array constains current Message
+
+extension Message: Equatable { }
+
+func ==(lhs: Message, rhs: Message) -> Bool {
+    return lhs.uid == rhs.uid
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

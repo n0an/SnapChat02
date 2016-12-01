@@ -65,6 +65,7 @@ class NewMessageTableViewController: FriendsTableViewController {
         recipients.removeAll()
         image = nil
         videoURL = nil
+        self.tableView.reloadData()
         
         // Return to Tab #1
         self.tabBarController?.selectedIndex = 0
@@ -80,7 +81,7 @@ class NewMessageTableViewController: FriendsTableViewController {
             sendImageMessage(withImage: image)
         }
         
-        self.cancel()
+        
         
     }
 
@@ -175,6 +176,7 @@ class NewMessageTableViewController: FriendsTableViewController {
             } else {
                 print("===NAG=== Message with \(type) media has been saved to Firebase Database")
                 
+                self.cancel()
             }
             
         }
@@ -232,6 +234,18 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         userCell.textLabel?.text = user.username
         
+        if recipients.keys.contains(user.uid) {
+            
+            userCell.accessoryType = .checkmark
+
+            
+            
+        } else {
+            userCell.accessoryType = .none
+
+            
+        }
+        
         return userCell
         
     }
@@ -241,21 +255,22 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let selectedCell = tableView.cellForRow(at: indexPath)
+//        let selectedCell = tableView.cellForRow(at: indexPath)
         let user = self.users[indexPath.row]
         
         
         if recipients.keys.contains(user.uid) {
             
             recipients.removeValue(forKey: user.uid)
-            selectedCell?.accessoryType = .none
+//            selectedCell?.accessoryType = .none
             
         } else {
             
             recipients[user.uid] = user
-            selectedCell?.accessoryType = .checkmark
+//            selectedCell?.accessoryType = .checkmark
             
         }
+        self.tableView.reloadData()
         
         
         self.navigationItem.rightBarButtonItem?.isEnabled = self.recipients.count > 0
