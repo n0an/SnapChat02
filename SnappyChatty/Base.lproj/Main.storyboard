@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="1321" y="1305"/>
         </scene>
-        <!--Edit Friends Table View Controller-->
+        <!--Friends Table View Controller-->
         <scene sceneID="yMF-J7-yP1">
             <objects>
-                <tableViewController id="FwR-PD-H0q" customClass="EditFriendsTableViewController" customModule="SnappyChatty" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="FwR-PD-H0q" customClass="FriendsTableViewController" customModule="SnappyChatty" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="v4H-Vy-5f0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
