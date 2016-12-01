@@ -39,6 +39,91 @@ class NewMessageTableViewController: FriendsTableViewController {
         
     }
     
+    // MARK: - ACTIONS
+    
+    @IBAction func cancel() {
+        
+        recipients.removeAll()
+        image = nil
+        videoURL = nil
+        
+        // Return to Tab #1
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    @IBAction func sendDidTap(_ sender: AnyObject) {
+        
+        if let videoURL = videoURL {
+            
+            sendVideoMessage(withVideoURL: videoURL)
+            
+        } else if let image = image {
+            sendImageMessage(withImage: image)
+        }
+        
+    }
+
+    
+    func sendVideoMessage(withVideoURL videoURL: URL) {
+        
+    }
+    
+    func sendImageMessage(withImage image: UIImage) {
+        
+        let firImage = FIRImage(image: image)
+        
+        firImage.saveToFirebaseStorage(completion: { (meta, error) in
+        
+            if error != nil {
+                
+                print("===NAG=== Unable to upload image to Firebase Storage")
+
+            } else {
+                print("===NAG=== Successfully image uploaded to Firebase Storage")
+
+                
+                let downloadURL = meta?.downloadURL()?.absoluteString // URL for this image in storage
+                
+                if let url = downloadURL {
+                    
+                    self.postMessage(withURL: url)
+                    
+                }
+                
+                
+            }
+        
+        })
+        
+        
+        
+    }
+    
+    func postMessage(withURL imageURL: String) {
+        
+        var rec = [String]()
+        
+        for recipient in recipients {
+            rec.append(recipient.key)
+        }
+        
+        let message = Message(type: "image", recipients: rec, mediaURL: imageURL)
+        
+        message.save { (error) in
+            
+            if error != nil {
+                print("===NAG=== Error adding message to Firebase Database")
+
+            } else {
+                print("===NAG=== Message with Image has been saved to Firebase Database")
+
+            }
+            
+        }
+        
+        
+    }
+    
     
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +181,24 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        let user = self.users[indexPath.row]
         
+        
+        if recipients.keys.contains(user.uid) {
+            
+            recipients.removeValue(forKey: user.uid)
+            selectedCell?.accessoryType = .none
+            
+        } else {
+            
+            recipients[user.uid] = user
+            selectedCell?.accessoryType = .checkmark
+            
+        }
+        
+        
+        self.navigationItem.rightBarButtonItem?.isEnabled = self.recipients.count > 0
         
     }
     

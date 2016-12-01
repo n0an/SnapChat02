@@ -98,7 +98,7 @@ class User {
         
         // 2. Save friends
         
-        for friend in friends {
+        for friend in friends.keys {
             
             userRef.child("\(FRIENDS_REF)/\(friend)").setValue(true)
             

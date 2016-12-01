@@ -10,10 +10,10 @@ import Foundation
 import Firebase
 
 
-let DB_ROOT =       FIRDatabase.database().reference()
-let STORAGE_ROOT =  FIRStorage.storage().reference()
-
-let FRIENDS_REF =   "friends"
+let DB_ROOT         = FIRDatabase.database().reference()
+let FRIENDS_REF     = "friends"
+let MESSAGE_REF     = "messages"
+let RECIPIENTS_REF  = "recipients"
 
 class DataService {
     
@@ -23,13 +23,10 @@ class DataService {
         return _instance
     }
     
-    var REF_BASE =      DB_ROOT
-    var REF_USERS =     DB_ROOT.child("users")
-    var REF_MESSAGES =  DB_ROOT.child("messages")
-    
-    
-        
-    
+    var REF_BASE        = DB_ROOT
+    var REF_USERS       = DB_ROOT.child("users")
+    var REF_MESSAGES    = DB_ROOT.child("messages")
+
     
     /*
     var mainStorageRef: FIRStorageReference {
