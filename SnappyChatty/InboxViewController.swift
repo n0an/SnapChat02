@@ -66,7 +66,7 @@ class InboxViewController: UITableViewController {
         
         Message.observeNewMessage { (message) in
             
-            if !self.messages.contains(message) {
+            if message.recipients.contains(self.currentUser.uid) && !self.messages.contains(message) {
                 self.messages.insert(message, at: 0)
                 self.tableView.reloadData()
             }
