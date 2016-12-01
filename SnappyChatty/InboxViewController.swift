@@ -16,7 +16,8 @@ class InboxViewController: UITableViewController {
     var messages = [Message]()
     
     struct Storyboard {
-        static let loginVC = "ShowWelcomeViewController"
+        static let segueLogin = "ShowWelcomeViewController"
+        static let seguePhotoDisplayer = "Show Photo"
         static let cellID = "Message Cell"
 
     }
@@ -51,7 +52,7 @@ class InboxViewController: UITableViewController {
                 
                 
             } else {
-                self.performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
+                self.performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
             }
         })
 
@@ -70,11 +71,8 @@ class InboxViewController: UITableViewController {
                 self.messages.insert(message, at: 0)
                 self.tableView.reloadData()
             }
-            
-            
+        
         }
-        
-        
         
     }
     
@@ -85,10 +83,19 @@ class InboxViewController: UITableViewController {
     
         try! FIRAuth.auth()?.signOut()
         
-        performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
+        performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
 
+    }
     
     
+    // MARK: - Navigation
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Storyboard.seguePhotoDisplayer {
+            let destinationVC = segue.destination as! PhotoViewController
+            destinationVC.message = sender as! Message
+        }
     }
     
     
@@ -114,6 +121,18 @@ class InboxViewController: UITableViewController {
         
         
         return messageCell
+        
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let selectedMsg = self.messages[indexPath.row]
+        
+        self.performSegue(withIdentifier: Storyboard.seguePhotoDisplayer, sender: selectedMsg)
         
     }
     

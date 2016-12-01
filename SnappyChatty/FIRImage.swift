@@ -41,7 +41,36 @@ class FIRImage {
     
 }
 
-
+extension FIRImage {
+    
+    class func downloadImage(forUrl url: String, completion: @escaping (UIImage?, Error?) -> Void) {
+        
+        let ref = FIRStorage.storage().reference(forURL: url)
+        
+        ref.data(withMaxSize: 2 * 1024 * 1024, completion: { data, error in
+        
+            if error != nil {
+                print("===NAG=== Unable to download image from Firebase storage")
+            } else {
+                print("===NAG=== Image downloaded from Firebase storage")
+                
+                if let imageData = data {
+                    if let img = UIImage(data: imageData) {
+                        
+                        completion(img, error)
+                    }
+                } else {
+                    completion(nil, error)
+                }
+            }
+            
+        
+        })
+        
+        
+    }
+    
+}
 
 
 private extension UIImage {

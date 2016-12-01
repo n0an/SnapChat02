@@ -144,6 +144,19 @@ class Message {
 
 extension Message {
     
+    func downloadMessageImage(completion: @escaping (UIImage?, Error?) -> Void) {
+        
+        FIRImage.downloadImage(forUrl: self.mediaURL, completion: { (image, error) in
+            
+            completion(image, error)
+        
+        
+        })
+        
+        
+        
+    }
+    
     
     class func observeNewMessage(_ completion: @escaping (Message) -> Void) {
         
@@ -159,6 +172,8 @@ extension Message {
         
         
     }
+    
+    
     
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1824EBD31DF0B37B008876E8 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */; };
 		18491F031DEDF21400103725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F021DEDF21400103725 /* AppDelegate.swift */; };
 		18491F081DEDF21400103725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F061DEDF21400103725 /* Main.storyboard */; };
 		18491F0A1DEDF21400103725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18491F091DEDF21400103725 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		18491EFF1DEDF21400103725 /* SnappyChatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnappyChatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18491F021DEDF21400103725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18491F071DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				18C4593F1DF033CC00E40FEA /* FriendsTableViewController.swift */,
 				18AD93A81DEF665A00094421 /* UserCell.swift */,
 				18C459421DF046BC00E40FEA /* NewMessageTableViewController.swift */,
+				1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				18A2C70E1DEE0757000DD6B6 /* DataService.swift in Sources */,
 				18A2C7081DEE0513000DD6B6 /* LoginViewController.swift in Sources */,
 				18C459401DF033CC00E40FEA /* FriendsTableViewController.swift in Sources */,
+				1824EBD31DF0B37B008876E8 /* PhotoViewController.swift in Sources */,
 				18A2C6FF1DEE0138000DD6B6 /* GeneralHelper.swift in Sources */,
 				18A2C7031DEE026E000DD6B6 /* WelcomeViewController.swift in Sources */,
 				18FADAE21DF05A8600936D83 /* StorageService.swift in Sources */,
