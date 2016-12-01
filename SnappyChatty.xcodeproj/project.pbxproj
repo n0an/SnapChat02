@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1824EBD31DF0B37B008876E8 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */; };
+		1824EBD51DF0C190008876E8 /* PhotoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824EBD41DF0C190008876E8 /* PhotoViewController2.swift */; };
 		18491F031DEDF21400103725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F021DEDF21400103725 /* AppDelegate.swift */; };
 		18491F081DEDF21400103725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F061DEDF21400103725 /* Main.storyboard */; };
 		18491F0A1DEDF21400103725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18491F091DEDF21400103725 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		1824EBD41DF0C190008876E8 /* PhotoViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController2.swift; sourceTree = "<group>"; };
 		18491EFF1DEDF21400103725 /* SnappyChatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnappyChatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18491F021DEDF21400103725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18491F071DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				18AD93A81DEF665A00094421 /* UserCell.swift */,
 				18C459421DF046BC00E40FEA /* NewMessageTableViewController.swift */,
 				1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */,
+				1824EBD41DF0C190008876E8 /* PhotoViewController2.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				18FADAE21DF05A8600936D83 /* StorageService.swift in Sources */,
 				18C459431DF046BC00E40FEA /* NewMessageTableViewController.swift in Sources */,
 				18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */,
+				1824EBD51DF0C190008876E8 /* PhotoViewController2.swift in Sources */,
 				18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */,
 				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
 				18491F031DEDF21400103725 /* AppDelegate.swift in Sources */,

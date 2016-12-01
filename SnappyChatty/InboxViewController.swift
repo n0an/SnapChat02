@@ -15,6 +15,8 @@ class InboxViewController: UITableViewController {
     
     var messages = [Message]()
     
+    var selectedMsg: Message!
+    
     struct Storyboard {
         static let segueLogin = "ShowWelcomeViewController"
         static let seguePhotoDisplayer = "Show Photo"
@@ -60,6 +62,7 @@ class InboxViewController: UITableViewController {
         
     }
     
+    // MARK: - Helper Methods
     
     func fetchMessages() {
         
@@ -76,8 +79,28 @@ class InboxViewController: UITableViewController {
         
     }
     
+    func downloadImage(forSelectedMessage message: Message) {
+        
+        message.downloadMessageImage(completion: { (image, error) in
+            
+            if error == nil {
+                self.selectedMsg = message
+                self.performSegue(withIdentifier: Storyboard.seguePhotoDisplayer, sender: image!)
+                
+            } else {
+                
+                GeneralHelper.sharedHelper.showAlertOnViewController(viewController: self, withTitle: "Error", message: error!.localizedDescription, buttonTitle: "OK")
+            }
+            
+        })
+        
+        
+    }
+
     
     
+    
+    // MARK: - Actions
     
     @IBAction func actionLogoutTapped() {
     
@@ -94,7 +117,16 @@ class InboxViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Storyboard.seguePhotoDisplayer {
             let destinationVC = segue.destination as! PhotoViewController
-            destinationVC.message = sender as! Message
+            
+            let sendImg = sender as! UIImage
+            
+            destinationVC.message = selectedMsg
+            destinationVC.image = sendImg
+            
+            
+            
+            
+            
         }
     }
     
@@ -132,7 +164,12 @@ class InboxViewController: UITableViewController {
 
         let selectedMsg = self.messages[indexPath.row]
         
-        self.performSegue(withIdentifier: Storyboard.seguePhotoDisplayer, sender: selectedMsg)
+        if selectedMsg.type == "image" {
+            
+            self.downloadImage(forSelectedMessage: selectedMsg)
+            
+        }
+        
         
     }
     
