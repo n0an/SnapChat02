@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-//typealias CompletionHandler = (_ errMsg: String?, _ data: Any?) -> Void
+
 typealias CompletionHandler = (String?, Any?) -> Void
 
 
@@ -20,6 +20,20 @@ class AuthService {
     static var instance: AuthService {
         return _instance
     }
+    
+    private var _currentUser: User!
+
+    var currentUser: User {
+        
+        set {
+            _currentUser = newValue
+        } get {
+            
+            return _currentUser
+        }
+        
+    }
+    
     
     // ==================================
     // ========= Sign Up Method =========
@@ -45,15 +59,7 @@ class AuthService {
                         
                     } else {
                         
-                        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (firSignedUser, error) in
-                            if let error = error {
-                                // report error
-                                self.handleFirebaseError(error: error as NSError, onComplete: onComplete)
-                            } else {
-                                // We have successfully logged in
-                                onComplete?(nil, firSignedUser)
-                            }
-                        })
+                        self.completeSignIn(withEmail: email, password: password, onComplete: onComplete)
                     }
                 })
                 
@@ -69,21 +75,29 @@ class AuthService {
     
     func loginToFireBase(withEmail email: String, password: String, onComplete: CompletionHandler?) {
         
-        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (firSignedUser, error) in
-            if let error = error {
-                
-                print(error.localizedDescription)
-                
-            } else {
-                // We have successfully logged in
-                onComplete?(nil, firSignedUser)
-            }
-        })
-        
+        self.completeSignIn(withEmail: email, password: password, onComplete: onComplete)
         
     }
     
+    // MARK: - Helper Methods
     
+    func completeSignIn(withEmail email: String, password: String, onComplete: CompletionHandler?) {
+        
+        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (firSignedUser, error) in
+            
+            if let error = error {
+                
+                self.handleFirebaseError(error: error as NSError, onComplete: onComplete)
+                
+            } else {
+                // We have successfully logged in
+                
+                
+                onComplete?(nil, firSignedUser)
+            }
+        })
+
+    }
     
     func handleFirebaseError(error: NSError, onComplete: CompletionHandler?) {
         

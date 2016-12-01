@@ -13,6 +13,8 @@ import Firebase
 let DB_ROOT =       FIRDatabase.database().reference()
 let STORAGE_ROOT =  FIRStorage.storage().reference()
 
+let FRIENDS_REF =   "friends"
+
 class DataService {
     
     private static let _instance = DataService()
@@ -26,16 +28,7 @@ class DataService {
     var REF_MESSAGES =  DB_ROOT.child("messages")
     
     
-    
-//    var mainRef: FIRDatabaseReference {
-//        return FIRDatabase.database().reference()
-//        
-//    }
-    
-//    var userRef: FIRDatabaseReference {
-//        return mainRef.child(FIR_CHILD_USERS)
-//    }
-    
+        
     
     
     /*

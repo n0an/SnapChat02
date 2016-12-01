@@ -11,6 +11,8 @@ import Firebase
 
 class InboxViewController: UITableViewController {
     
+    var currentUser: User!
+    
     struct Storyboard {
         static let loginVC = "ShowWelcomeViewController"
     }
@@ -20,11 +22,34 @@ class InboxViewController: UITableViewController {
         super.viewDidLoad()
         
         
+        // check if the user logged in or not
+        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+            if let user = user {
+                // signed in
+                
+                DataService.instance.REF_USERS.child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let userDict = snapshot.value as? [String: Any] {
+                        
+                        self.currentUser = User(uid: user.uid, dictionary: userDict)
+
+                        print("===NAG===: currentUser = \(self.currentUser?.username)")
+                        
+                        AuthService.instance.currentUser = self.currentUser
+                        
+                        // §§ Fetch Messages
+                    }
+                    
+                })
+                
+                
+            } else {
+                self.performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
+            }
+        })
+
         
-        if FIRAuth.auth()?.currentUser == nil {
-            performSegue(withIdentifier: Storyboard.loginVC, sender: nil)
-        }
-        
+   
         
         
         

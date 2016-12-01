@@ -15,21 +15,12 @@ class WelcomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
-            
-            guard user != nil else {
-                return
-            }
-            
+        
+        if FIRAuth.auth()?.currentUser != nil {
             self.dismiss(animated: false, completion: nil)
-            
-//            if let user = user {
-//                
-//                self.dismiss(animated: false, completion: nil)
-//            } else {
-//                
-//            }
-        })
+        }
+        
+
     }
     
     override func viewDidLoad() {

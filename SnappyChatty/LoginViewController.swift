@@ -42,20 +42,14 @@ class LoginViewController: UITableViewController {
                     return
                 }
                 
+                
+                
                 self.dismiss(animated: true, completion: nil)
                 
                 
             })
             
             
-            
-//            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (firUser, error) in
-//                if let error = error {
-//                    self.showAlert(title: "Oops!", message: error.localizedDescription, buttonTitle: "OK")
-//                } else {
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            })
         }
         
         

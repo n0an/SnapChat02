@@ -58,10 +58,7 @@ class SignupTableViewController: UITableViewController {
             showAlert(withMessage: "Enter full name")
             return
         }
-//        guard profileImage != nil else {
-//            showAlert(withMessage: "Choose profile image")
-//            return
-//        }
+
         
         
         let username = userNameTextField.text!
@@ -77,6 +74,7 @@ class SignupTableViewController: UITableViewController {
                 return
             }
             
+            
             self.dismiss(animated: true, completion: nil)
         
         
@@ -84,37 +82,6 @@ class SignupTableViewController: UITableViewController {
         
         
         
-//        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
-//            if error != nil {
-//                // report error
-//                self.showAlert(withMessage: "\(error?.localizedDescription)")
-//                
-//            } else if let firUser = firUser {
-//                
-//                let newUser = User(uid: firUser.uid, username: username, friends: [])
-//                
-////                let newUser = User(uid: firUser.uid, username: username, fullName: fullName, bio: "", website: "", follows: [], followedBy: [], profileImage: self.profileImage)
-//                
-//                newUser.save(completion: { (error) in
-//                    
-//                    if error != nil {
-//                        // report error
-//                        self.showAlert(withMessage: "\(error?.localizedDescription)")
-//                        
-//                    } else {
-//                        FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (firUser, error) in
-//                            if let error = error {
-//                                // report error
-//                                self.showAlert(withMessage: "\(error.localizedDescription)")
-//                            } else {
-//                                self.dismiss(animated: true, completion: nil)
-//                            }
-//                        })
-//                    }
-//                    
-//                })
-//            }
-//        })
         
         
     }
@@ -124,14 +91,7 @@ class SignupTableViewController: UITableViewController {
     }
     
     
-//    @IBAction func actionChangeProfilePhotoDidTap() {
-//        
-//        imagePickerHelper = ImagePickerHelper(viewController: self, completion: { (image) in
-//            self.profileImageView.image = image
-//            self.profileImage = image
-//        })
-//        
-//    }
+
     
     
     
