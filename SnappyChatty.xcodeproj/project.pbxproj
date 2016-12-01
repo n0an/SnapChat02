@@ -23,6 +23,8 @@
 		18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2C70F1DEE0952000DD6B6 /* AuthService.swift */; };
 		18AD93A91DEF665A00094421 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD93A81DEF665A00094421 /* UserCell.swift */; };
 		18C459401DF033CC00E40FEA /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C4593F1DF033CC00E40FEA /* FriendsTableViewController.swift */; };
+		18C459431DF046BC00E40FEA /* NewMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C459421DF046BC00E40FEA /* NewMessageTableViewController.swift */; };
+		18C459451DF0474A00E40FEA /* MediaPickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C459441DF0474A00E40FEA /* MediaPickerHelper.swift */; };
 		727AF2669FFF39BF9A9D8A5D /* Pods_SnappyChatty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,9 @@
 		18A2C70F1DEE0952000DD6B6 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		18AD93A81DEF665A00094421 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		18C4593F1DF033CC00E40FEA /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		18C459411DF0459F00E40FEA /* SnappyChatty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SnappyChatty.entitlements; sourceTree = "<group>"; };
+		18C459421DF046BC00E40FEA /* NewMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewController.swift; sourceTree = "<group>"; };
+		18C459441DF0474A00E40FEA /* MediaPickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPickerHelper.swift; sourceTree = "<group>"; };
 		4474750C0F15FA350AA57A50 /* Pods_SnappyChatty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnappyChatty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64606941F53D4CBC3C3CC92D /* Pods-SnappyChatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.debug.xcconfig"; sourceTree = "<group>"; };
 		EC152AE8F10872D8B67E3313 /* Pods-SnappyChatty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnappyChatty.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnappyChatty/Pods-SnappyChatty.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 		18491F011DEDF21400103725 /* SnappyChatty */ = {
 			isa = PBXGroup;
 			children = (
+				18C459411DF0459F00E40FEA /* SnappyChatty.entitlements */,
 				18491F021DEDF21400103725 /* AppDelegate.swift */,
 				18A2C7111DEE1502000DD6B6 /* Services */,
 				18A2C7001DEE014A000DD6B6 /* Helper Classes */,
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				18A2C6FE1DEE0138000DD6B6 /* GeneralHelper.swift */,
+				18C459441DF0474A00E40FEA /* MediaPickerHelper.swift */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -113,6 +120,7 @@
 				1837D22E1DEF57930035E9F8 /* EditFriendsTableViewController.swift */,
 				18C4593F1DF033CC00E40FEA /* FriendsTableViewController.swift */,
 				18AD93A81DEF665A00094421 /* UserCell.swift */,
+				18C459421DF046BC00E40FEA /* NewMessageTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -198,6 +206,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 358V8FBM3U;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -286,11 +299,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C459451DF0474A00E40FEA /* MediaPickerHelper.swift in Sources */,
 				18A2C70E1DEE0757000DD6B6 /* DataService.swift in Sources */,
 				18A2C7081DEE0513000DD6B6 /* LoginViewController.swift in Sources */,
 				18C459401DF033CC00E40FEA /* FriendsTableViewController.swift in Sources */,
 				18A2C6FF1DEE0138000DD6B6 /* GeneralHelper.swift in Sources */,
 				18A2C7031DEE026E000DD6B6 /* WelcomeViewController.swift in Sources */,
+				18C459431DF046BC00E40FEA /* NewMessageTableViewController.swift in Sources */,
 				18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */,
 				18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */,
 				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
@@ -421,6 +436,7 @@
 			baseConfigurationReference = 64606941F53D4CBC3C3CC92D /* Pods-SnappyChatty.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SnappyChatty/SnappyChatty.entitlements;
 				DEVELOPMENT_TEAM = 358V8FBM3U;
 				INFOPLIST_FILE = SnappyChatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -435,6 +451,7 @@
 			baseConfigurationReference = EC152AE8F10872D8B67E3313 /* Pods-SnappyChatty.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SnappyChatty/SnappyChatty.entitlements;
 				DEVELOPMENT_TEAM = 358V8FBM3U;
 				INFOPLIST_FILE = SnappyChatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

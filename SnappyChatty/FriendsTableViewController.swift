@@ -107,7 +107,7 @@ class FriendsTableViewController: UITableViewController {
             }
         }
         
-      
+        
         
         return userCell
     }
