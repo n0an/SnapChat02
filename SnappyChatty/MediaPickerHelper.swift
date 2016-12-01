@@ -85,6 +85,8 @@ extension MediaPickerHelper: UIImagePickerControllerDelegate, UINavigationContro
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         viewController.dismiss(animated: true, completion: nil)
+        
+        completion(nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

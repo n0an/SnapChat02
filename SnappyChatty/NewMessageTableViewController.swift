@@ -29,18 +29,32 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         self.tableView.allowsSelection = true
         
+        
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard image == nil && videoURL == nil else { return }
+        
         mediaPickerHelper = MediaPickerHelper(viewController: self, completion: { (mediaObject) in
+            
+            
             
             if let videoURL = mediaObject as? URL {
                 self.videoURL = videoURL
             } else if let snapshotImage = mediaObject as? UIImage {
                 self.image = snapshotImage
+            } else {
+                self.tabBarController?.selectedIndex = 0
             }
             
             
             
         })
-
+        
         
     }
     
@@ -65,6 +79,8 @@ class NewMessageTableViewController: FriendsTableViewController {
         } else if let image = image {
             sendImageMessage(withImage: image)
         }
+        
+        self.cancel()
         
     }
 
@@ -167,35 +183,6 @@ class NewMessageTableViewController: FriendsTableViewController {
         
     }
     
-//    func postMessage(withVideoURL videoURL: String) {
-//        
-//    }
-//
-//    
-//    func postMessage(withImageURL imageURL: String) {
-//        
-//        var rec = [String]()
-//        
-//        for recipient in recipients {
-//            rec.append(recipient.key)
-//        }
-//        
-//        let message = Message(type: "image", recipients: rec, mediaURL: imageURL)
-//        
-//        message.save { (error) in
-//            
-//            if error != nil {
-//                print("===NAG=== Error adding message to Firebase Database")
-//
-//            } else {
-//                print("===NAG=== Message with Image has been saved to Firebase Database")
-//
-//            }
-//            
-//        }
-//        
-//        
-//    }
     
     
     
