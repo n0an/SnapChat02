@@ -166,7 +166,9 @@ class NewMessageTableViewController: FriendsTableViewController {
             rec.append(recipient.key)
         }
         
-        let message = Message(type: type, recipients: rec, mediaURL: urlString)
+        let currentUser = AuthService.instance.currentUser
+        
+        let message = Message(type: type, recipients: rec, createdByUsername: currentUser.fullName, mediaURL: urlString)
         
         message.save { (error) in
             

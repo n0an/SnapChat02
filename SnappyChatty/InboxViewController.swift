@@ -26,22 +26,20 @@ class InboxViewController: UITableViewController {
 
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // check if the user logged in or not
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if let user = user {
                 // signed in
                 
-                DataService.instance.REF_USERS.child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                DataService.instance.REF_USERS.child(user.uid).observe(.value, with: { (snapshot) in
                     
                     if let userDict = snapshot.value as? [String: Any] {
                         
                         self.currentUser = User(uid: user.uid, dictionary: userDict)
-
+                        
                         print("===NAG===: currentUser = \(self.currentUser?.username)")
                         
                         AuthService.instance.currentUser = self.currentUser
@@ -59,6 +57,16 @@ class InboxViewController: UITableViewController {
                 self.performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
             }
         })
+        
+        
+    }
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
 
         
         
@@ -70,14 +78,29 @@ class InboxViewController: UITableViewController {
         
         self.messages = []
         
-        Message.observeNewMessage { (message) in
-            
-            if message.recipients.contains(self.currentUser.uid) && !self.messages.contains(message) {
-                self.messages.insert(message, at: 0)
-                self.tableView.reloadData()
+        Message.observeNewMessage { (messages) in
+            for msg in messages {
+                if msg.recipients.contains(self.currentUser.uid) && !self.messages.contains(msg) {
+                    self.messages.insert(msg, at: 0)
+                }
             }
-        
+            self.tableView.reloadData()
+
         }
+        
+        
+        
+//        Message.observeNewMessage { (messages) in
+//            
+//            
+//            
+//            
+////            if message.recipients.contains(self.currentUser.uid) && !self.messages.contains(message) {
+////                self.messages.insert(message, at: 0)
+////                self.tableView.reloadData()
+////            }
+//        
+//        }
         
     }
     
@@ -159,14 +182,11 @@ class InboxViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let messageCell = tableView.dequeueReusableCell(withIdentifier: Storyboard.cellID, for: indexPath)
+        let messageCell = tableView.dequeueReusableCell(withIdentifier: Storyboard.cellID, for: indexPath) as! MessageCell
         
         let message = self.messages[indexPath.row]
         
-        messageCell.textLabel?.text = "\((message.createdTime)!)"
-        
-        
-        
+        messageCell.configureCell(message: message)
         
         return messageCell
         

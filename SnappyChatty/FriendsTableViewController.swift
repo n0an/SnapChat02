@@ -21,11 +21,8 @@ class FriendsTableViewController: UITableViewController {
     var selectedUsers = [String: Bool]()
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        self.tableView.allowsSelection = isEditingFriends
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         DataService.instance.REF_USERS.observe(.value, with: {
             snapshot in
@@ -66,6 +63,17 @@ class FriendsTableViewController: UITableViewController {
             
             
         })
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        self.tableView.allowsSelection = isEditingFriends
+        
+        
         
     }
   

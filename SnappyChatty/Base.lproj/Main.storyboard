@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,18 +14,55 @@
         <scene sceneID="hRO-wf-HzO">
             <objects>
                 <tableViewController id="m60-zw-J0P" customClass="InboxViewController" customModule="SnappyChatty" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nh2-WY-VcI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="nh2-WY-VcI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message Cell" id="r4Y-r8-N1I">
-                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message Cell" rowHeight="100" id="r4Y-r8-N1I" customClass="MessageCell" customModule="SnappyChatty" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="22" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r4Y-r8-N1I" id="SSg-MZ-4jL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTg-Oq-Yvo">
+                                            <rect key="frame" x="8" y="67" width="48" height="24"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWG-vI-qnl">
+                                            <rect key="frame" x="8" y="20" width="256" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="256" id="Dp9-Vl-6MS"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wfr-LO-pJe">
+                                            <rect key="frame" x="272" y="37" width="95" height="24"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Wfr-LO-pJe" firstAttribute="centerY" secondItem="SSg-MZ-4jL" secondAttribute="centerY" id="6cI-SW-hWw"/>
+                                        <constraint firstItem="LWG-vI-qnl" firstAttribute="leading" secondItem="SSg-MZ-4jL" secondAttribute="leadingMargin" id="Gcv-Ri-a9H"/>
+                                        <constraint firstItem="LWG-vI-qnl" firstAttribute="top" secondItem="SSg-MZ-4jL" secondAttribute="topMargin" constant="12" id="GgX-Qi-cbX"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Wfr-LO-pJe" secondAttribute="trailing" id="TD0-DK-hd1"/>
+                                        <constraint firstItem="gTg-Oq-Yvo" firstAttribute="leading" secondItem="SSg-MZ-4jL" secondAttribute="leading" constant="8" id="Vgt-hk-D8b"/>
+                                        <constraint firstAttribute="bottom" secondItem="gTg-Oq-Yvo" secondAttribute="bottom" constant="8" id="amC-z0-ZIh"/>
+                                        <constraint firstItem="Wfr-LO-pJe" firstAttribute="leading" secondItem="LWG-vI-qnl" secondAttribute="trailing" constant="8" id="eok-K4-EoX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="messageTypeLabel" destination="gTg-Oq-Yvo" id="36M-17-hrt"/>
+                                    <outlet property="timestampLabel" destination="Wfr-LO-pJe" id="cVy-Jf-Ok4"/>
+                                    <outlet property="userFullNameLabel" destination="LWG-vI-qnl" id="5gO-DJ-CpO"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -52,7 +90,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3mf-2j-vTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="-87"/>
+            <point key="canvasLocation" x="1320.8" y="-87.706146926536732"/>
         </scene>
         <!--Send to-->
         <scene sceneID="kM8-h6-Llu">

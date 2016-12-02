@@ -18,13 +18,15 @@ class Message {
 
     var recipients: [String]
     
+    var createdByUsername: String
+    
     var mediaURL: String
     
     var messageRef: FIRDatabaseReference
     
     // MARK: - Initializers
    
-    init(type: String, recipients: [String], mediaURL: String) {
+    init(type: String, recipients: [String], createdByUsername: String, mediaURL: String) {
         
         let allMessagesRef = DataService.instance.REF_MESSAGES
         
@@ -35,6 +37,8 @@ class Message {
         self.type = type
         
         self.mediaURL = mediaURL
+        
+        self.createdByUsername = createdByUsername
         
         messageRef = allMessagesRef.child(self.uid)
         
@@ -74,24 +78,12 @@ class Message {
         
         self.type = dictionary["type"] as! String
         
-//        if let type = dictionary["type"] as? String {
-//            self.type = type
-//        }
-        
         self.mediaURL = dictionary["mediaURL"] as! String
-        
-//        if let mediaURL = dictionary["mediaURL"] as? String {
-//            self.mediaURL = mediaURL
-//        }
 
         self.createdTime = dictionary["createdTime"] as! Double
-        
-//        if let createdTime = dictionary["createdTime"] as? String {
-//            self.createdTime = createdTime
-//        }
-        
-        
-        
+
+        self.createdByUsername = dictionary["createdByUsername"] as! String
+     
         self.recipients = []
         
         if let recipientsDict = dictionary["recipients"] as? [String: Bool] {
@@ -124,6 +116,7 @@ class Message {
             
             "mediaURL": mediaURL,
             "type" : type,
+            "createdByUsername" : createdByUsername,
             "createdTime": FIRServerValue.timestamp()
         ]
         
@@ -158,18 +151,47 @@ extension Message {
     }
     
     
-    class func observeNewMessage(_ completion: @escaping (Message) -> Void) {
+    class func observeNewMessage(_ completion: @escaping ([Message]) -> Void) {
         
-        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
+        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.value, with: { snapshot in
             
-            let msg = Message(uid: snapshot.key, dictionary: snapshot.value as! [String: Any])
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                
+                var receivedMessages = [Message]()
+                
+                for snap in snapshot {
+                    
+                    if let messageDict = snap.value as? [String: Any] {
+                        
+                        let key = snap.key
+                        let message = Message(uid: key, dictionary: messageDict)
+                        
+                        receivedMessages.append(message)
+                        
+                    }
+                    
+                    
+                }
+                completion(receivedMessages)
+                
+            }
             
-            completion(msg)
 
+            
         
         
         })
         
+//        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
+//            
+//            let msg = Message(uid: snapshot.key, dictionary: snapshot.value as! [String: Any])
+//            
+//            completion(msg)
+//
+//        
+//        
+//        })
+//        
         
     }
     
