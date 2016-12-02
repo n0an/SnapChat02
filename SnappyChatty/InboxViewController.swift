@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import AVFoundation
+import AVKit
 
 class InboxViewController: UITableViewController {
     
@@ -91,8 +93,22 @@ class InboxViewController: UITableViewController {
                 
                 GeneralHelper.sharedHelper.showAlertOnViewController(viewController: self, withTitle: "Error", message: error!.localizedDescription, buttonTitle: "OK")
             }
-            
         })
+    }
+    
+    
+    func playVideo(fromSelectedMessage message: Message) {
+        
+        let videoURL = URL(string: message.mediaURL)
+        
+        let player = AVPlayer(url: videoURL!)
+        
+        let playerVC = AVPlayerViewController()
+        
+        playerVC.player = player
+        
+        self.present(playerVC, animated: true, completion: nil)
+        
         
         
     }
@@ -168,6 +184,8 @@ class InboxViewController: UITableViewController {
             
             self.downloadImage(forSelectedMessage: selectedMsg)
             
+        } else if selectedMsg.type == "video" {
+            self.playVideo(fromSelectedMessage: selectedMsg)
         }
         
         
