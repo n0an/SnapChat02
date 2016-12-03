@@ -235,6 +235,8 @@ class InboxViewController: UITableViewController {
             self.playVideo(fromSelectedMessage: selectedMsg)
         }
         
+        selectedMsg.removeRecipient(user: currentUser.uid)
+        
         
     }
     

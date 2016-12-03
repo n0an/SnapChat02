@@ -132,8 +132,14 @@ extension User {
 }
 
 
+// COMPARE METHOD (FOR "CONTAINS" FEATURE) - for checking if array constains current User
 
+extension User: Equatable { }
 
+func ==(lhs: User, rhs: User) -> Bool {
+    return lhs.uid == rhs.uid
+    
+}
 
 
 

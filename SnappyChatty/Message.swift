@@ -196,9 +196,34 @@ extension Message {
     }
     
     
+    func removeRecipient(user: String) {
+        
+        // If there's only one recipient - delete ALL Message
+        // If there're more than one recipient - delete just passed recipient
+        
+        if self.recipients.count == 1 {
+            
+            messageRef.removeValue()
+            
+        } else {
+            
+            if let indexRec = self.recipients.index(of: user) {
+                self.recipients.remove(at: indexRec)
+            }
+            
+            messageRef.child("\(RECIPIENTS_REF)/\(user)").removeValue()
+        }
+        
+        
+        
+        
+        
+    }
+    
     
     
 }
+
 
 // COMPARE METHOD (FOR "CONTAINS" FEATURE) - for checking if array constains current Message
 
@@ -208,6 +233,10 @@ func ==(lhs: Message, rhs: Message) -> Bool {
     return lhs.uid == rhs.uid
     
 }
+
+
+
+
 
 
 
