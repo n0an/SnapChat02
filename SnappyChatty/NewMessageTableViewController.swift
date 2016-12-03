@@ -83,6 +83,8 @@ class NewMessageTableViewController: FriendsTableViewController {
             sendImageMessage(withImage: image)
         }
         
+        self.tabBarController?.selectedIndex = 0
+        
         
         
     }

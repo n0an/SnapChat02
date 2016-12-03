@@ -150,8 +150,7 @@ extension Message {
         
     }
     
-    
-    class func observeNewMessage(_ completion: @escaping ([Message]) -> Void) {
+    class func observeMessages(_ completion: @escaping ([Message]) -> Void) {
         
         DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.value, with: { snapshot in
             
@@ -176,22 +175,27 @@ extension Message {
                 
             }
             
-
-            
         
         
         })
         
-//        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
-//            
-//            let msg = Message(uid: snapshot.key, dictionary: snapshot.value as! [String: Any])
-//            
-//            completion(msg)
-//
-//        
-//        
-//        })
-//        
+        
+    }
+    
+    
+    class func observeNewMessage(_ completion: @escaping (Message) -> Void) {
+        
+
+        
+        DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
+            
+            let msg = Message(uid: snapshot.key, dictionary: snapshot.value as! [String: Any])
+            
+            completion(msg)
+
+        
+        
+        })
         
     }
     

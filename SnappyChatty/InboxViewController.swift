@@ -67,9 +67,6 @@ class InboxViewController: UITableViewController {
         
         
         
-
-        
-        
     }
     
     // MARK: - Helper Methods
@@ -78,15 +75,18 @@ class InboxViewController: UITableViewController {
         
         self.messages = []
         
-        Message.observeNewMessage { (messages) in
-            for msg in messages {
+        Message.observeMessages { (fetchedMessages) in
+            
+            for msg in fetchedMessages {
                 if msg.recipients.contains(self.currentUser.uid) && !self.messages.contains(msg) {
                     self.messages.insert(msg, at: 0)
                 }
             }
             self.tableView.reloadData()
-
+            self.refreshControl?.endRefreshing()
+            
         }
+        
         
         
         
@@ -173,6 +173,13 @@ class InboxViewController: UITableViewController {
         clearFriendsAndRecipientsLists()
         
         performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
+
+    }
+    
+    @IBAction func refreshControlValueChanged() {
+        fetchMessages()
+        
+        self.fetchMessages()
 
     }
     
