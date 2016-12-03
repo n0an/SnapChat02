@@ -38,10 +38,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tintColor = UIColor(red: 255/255, green: 45/255, blue: 85/255, alpha: 1)
         window!.tintColor = tintColor
     }
+    
+    func updateBadgeNumber() {
+        
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        
+        if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
+            
+            if let inboxViewController = navigationController.topViewController as? InboxViewController{
+                
+                let numberOfMessages = inboxViewController.messages.count
+                
+                UIApplication.shared.applicationIconBadgeNumber = numberOfMessages
+            }
+            
+        }
+        
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        self.updateBadgeNumber()
+
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -56,19 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         
+        self.updateBadgeNumber()
         
-        let tabBarController = self.window?.rootViewController as! UITabBarController
-//
-        if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
-            
-            if let inboxViewController = navigationController.topViewController as? InboxViewController{
-                
-                let numberOfMessages = inboxViewController.messages.count
-                
-                UIApplication.shared.applicationIconBadgeNumber = numberOfMessages
-            }
-            
-        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
