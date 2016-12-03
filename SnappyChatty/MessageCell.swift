@@ -55,7 +55,7 @@ fileprivate extension NSDate {
             dateString = "Yesterday"
         } else if interval > 1 {
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "mm/dd/yyyy"
+            dateFormat.dateFormat = "dd/MM/yyyy"
             dateString = dateFormat.string(from: self as Date)
         }
         
