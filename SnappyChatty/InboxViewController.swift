@@ -83,6 +83,7 @@ class InboxViewController: UITableViewController {
                 }
             }
             self.tableView.reloadData()
+            self.updateTabBarBadge()
             self.refreshControl?.endRefreshing()
             
         }
@@ -102,6 +103,18 @@ class InboxViewController: UITableViewController {
 //        
 //        }
         
+    }
+    
+    func updateTabBarBadge() {
+        let tabArray = (self.tabBarController?.tabBar.items)!
+        let inboxItem = tabArray[0]
+        
+        if self.messages.count > 0 {
+            inboxItem.badgeValue = "\(self.messages.count)"
+        } else {
+            inboxItem.badgeValue = nil
+            
+        }
     }
     
     func downloadImage(forSelectedMessage message: Message) {
