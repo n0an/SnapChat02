@@ -64,10 +64,10 @@ class NewMessageTableViewController: FriendsTableViewController {
     @IBAction func cancel() {
         
         recipients.removeAll()
-        users.removeAll()
+//        users.removeAll()
         image = nil
         videoURL = nil
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
         
         // Return to Tab #1
         self.tabBarController?.selectedIndex = 0
@@ -239,17 +239,17 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         userCell.textLabel?.text = user.username
         
-        if recipients.keys.contains(user.uid) {
-            
-            userCell.accessoryType = .checkmark
-
-            
-            
-        } else {
-            userCell.accessoryType = .none
-
-            
-        }
+//        if recipients.keys.contains(user.uid) {
+//            
+//            userCell.accessoryType = .checkmark
+//
+//            
+//            
+//        } else {
+//            userCell.accessoryType = .none
+//
+//            
+//        }
         
         return userCell
         
@@ -260,22 +260,45 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        let selectedCell = tableView.cellForRow(at: indexPath)
-        let user = self.users[indexPath.row]
+        let selectedCell = tableView.cellForRow(at: indexPath)
         
+        let selectedUser = self.users[indexPath.row]
         
-        if recipients.keys.contains(user.uid) {
+        if selectedCell?.accessoryType == .checkmark {
+            // already selected, uncheck
+
+            selectedCell?.accessoryType = .none
             
-            recipients.removeValue(forKey: user.uid)
-//            selectedCell?.accessoryType = .none
+            if recipients.keys.contains(selectedUser.uid) {
+                recipients.removeValue(forKey: selectedUser.uid)
+            }
+            
             
         } else {
+            // isn't selected, check
             
-            recipients[user.uid] = user
-//            selectedCell?.accessoryType = .checkmark
+            selectedCell?.accessoryType = .checkmark
             
+            if !recipients.keys.contains(selectedUser.uid) {
+                recipients[selectedUser.uid] = selectedUser
+            }
+
+
         }
-        self.tableView.reloadData()
+        
+        
+//        if recipients.keys.contains(user.uid) {
+//            
+//            recipients.removeValue(forKey: user.uid)
+////            selectedCell?.accessoryType = .none
+//            
+//        } else {
+//            
+//            recipients[user.uid] = user
+////            selectedCell?.accessoryType = .checkmark
+//            
+//        }
+////        self.tableView.reloadData()
         
         
         self.navigationItem.rightBarButtonItem?.isEnabled = self.recipients.count > 0

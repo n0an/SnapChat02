@@ -22,7 +22,7 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "\(message.type)"
+        title = "\(message.type) from \(message.createdByUsername)"
         
         imageView = UIImageView(image: image)
         

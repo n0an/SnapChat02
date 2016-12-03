@@ -130,7 +130,11 @@ class InboxViewController: UITableViewController {
         
         playerVC.player = player
         
-        self.present(playerVC, animated: true, completion: nil)
+        
+        self.present(playerVC, animated: true, completion: {
+            playerVC.player?.play()
+        
+        })
         
         
         
@@ -191,14 +195,14 @@ class InboxViewController: UITableViewController {
         if segue.identifier == Storyboard.seguePhotoDisplayer {
             let destinationVC = segue.destination as! PhotoViewController
             
+            destinationVC.hidesBottomBarWhenPushed = true
+            
+            
             let sendImg = sender as! UIImage
             
             destinationVC.message = selectedMsg
             destinationVC.image = sendImg
-            
-            
-            
-            
+      
             
         }
     }

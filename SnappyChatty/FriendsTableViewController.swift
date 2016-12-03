@@ -24,7 +24,8 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        DataService.instance.REF_USERS.observe(.value, with: {
+        DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: {
+        
             snapshot in
             
             if let users = snapshot.value as? [String: Any] {
@@ -60,9 +61,49 @@ class FriendsTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 
             }
-            
-            
+
+        
         })
+        
+//        DataService.instance.REF_USERS.observe(.value, with: {
+//            snapshot in
+//            
+//            if let users = snapshot.value as? [String: Any] {
+//                
+//                self.users = []
+//                
+//                for (key, value) in users {
+//                    
+//                    // 1. Check if we are in EditingFriends Mode. If we are in EditingFriends Mode, fetch all users
+//                    // 2. If we are NOT in EditingMode, fetch only friends user
+//                    
+//                    if !self.isEditingFriends {
+//                        let currentUser = AuthService.instance.currentUser
+//                        if currentUser.friends.index(forKey: key) == nil {
+//                            continue
+//                        }
+//                    }
+//                    
+//                    
+//                    if let profileDict = value as? [String: Any] {
+//                        
+//                        if let username = profileDict["username"] as? String,
+//                            let fullName = profileDict["fullName"] as? String {
+//                            let uid = key
+//                            let user = User(uid: uid, username: username, fullName: fullName, friends: [])
+//                            self.users.append(user)
+//                        }
+//                        
+//                    }
+//                    
+//                }
+//                
+//                self.tableView.reloadData()
+//                
+//            }
+//            
+//            
+//        })
         
     }
     
@@ -131,18 +172,25 @@ class FriendsTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        
         let user = self.users[indexPath.row]
         
         if !AuthService.instance.currentUser.isFriendWith(user: user) {
             
+            selectedCell?.accessoryType = .checkmark
+            
             AuthService.instance.currentUser.addFriend(user: user.uid)
             
         } else {
+            
+            selectedCell?.accessoryType = .none
+            
             AuthService.instance.currentUser.removeFriend(user: user.uid)
             
         }
         
-        tableView.reloadData()
+        
        
      
     }
