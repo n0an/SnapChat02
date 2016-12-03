@@ -20,6 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         customizeAppearance()
         
+        let userNotificationTypes: UIUserNotificationType = [.badge]
+        
+        let notificationSettings = UIUserNotificationSettings(types: userNotificationTypes, categories: nil)
+        
+        application.registerUserNotificationSettings(notificationSettings)
+        
+        
+        
+        
+        
+        
         return true
     }
     
@@ -36,10 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
         
         
         let tabBarController = self.window?.rootViewController as! UITabBarController
-        
+//
         if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
             
             if let inboxViewController = navigationController.topViewController as? InboxViewController{
@@ -50,27 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
         }
-        
-        
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-//        let tabBarController = self.window?.rootViewController as! UITabBarController
-//        
-//        if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
-//            
-//            if let inboxViewController = navigationController.topViewController as? InboxViewController{
-//                
-//                let numberOfMessages = inboxViewController.messages.count
-//                
-//                UIApplication.shared.applicationIconBadgeNumber = numberOfMessages
-//            }
-//            
-//        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
