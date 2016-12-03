@@ -67,7 +67,7 @@ class NewMessageTableViewController: FriendsTableViewController {
 //        users.removeAll()
         image = nil
         videoURL = nil
-//        self.tableView.reloadData()
+        self.tableView.reloadData()
         
         // Return to Tab #1
         self.tabBarController?.selectedIndex = 0
@@ -239,17 +239,17 @@ class NewMessageTableViewController: FriendsTableViewController {
         
         userCell.textLabel?.text = user.username
         
-//        if recipients.keys.contains(user.uid) {
-//            
-//            userCell.accessoryType = .checkmark
-//
-//            
-//            
-//        } else {
-//            userCell.accessoryType = .none
-//
-//            
-//        }
+        if recipients.keys.contains(user.uid) {
+            
+            userCell.accessoryType = .checkmark
+            
+        } else {
+            userCell.accessoryType = .none
+            
+        }
+        
+        self.navigationItem.rightBarButtonItem?.isEnabled = self.recipients.count > 0
+
         
         return userCell
         

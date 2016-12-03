@@ -37,6 +37,8 @@ class FIRImage {
         })
         
         
+        
+        
     }
     
 }
@@ -66,6 +68,21 @@ extension FIRImage {
             
         
         })
+        
+        
+    }
+    
+    
+    class func removeImage(forUrl url: String, completion: @escaping (Error?) -> Void) {
+        
+        let ref = FIRStorage.storage().reference(forURL: url)
+        
+        ref.delete { (error) in
+            
+            completion(error)
+            
+            
+        }
         
         
     }

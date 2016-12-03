@@ -19,6 +19,8 @@ class InboxViewController: UITableViewController {
     
     var selectedMsg: Message!
     
+    var toRemoveRecipient: Bool = false
+    
     struct Storyboard {
         static let segueLogin = "ShowWelcomeViewController"
         static let seguePhotoDisplayer = "Show Photo"
@@ -28,6 +30,15 @@ class InboxViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if toRemoveRecipient == true {
+            
+            toRemoveRecipient = false
+            
+            self.selectedMsg.removeRecipient(user: currentUser.uid)
+            
+            
+        }
         
         // check if the user logged in or not
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
@@ -124,6 +135,7 @@ class InboxViewController: UITableViewController {
             if error == nil {
                 self.selectedMsg = message
                 self.performSegue(withIdentifier: Storyboard.seguePhotoDisplayer, sender: image!)
+                self.selectedMsg.removeRecipient(user: self.currentUser.uid)
                 
             } else {
                 
@@ -143,11 +155,19 @@ class InboxViewController: UITableViewController {
         
         playerVC.player = player
         
+        self.selectedMsg = message
+        
         
         self.present(playerVC, animated: true, completion: {
             playerVC.player?.play()
+            
+            self.toRemoveRecipient = true
+            
         
         })
+        
+        
+        
         
         
         
@@ -259,7 +279,7 @@ class InboxViewController: UITableViewController {
             self.playVideo(fromSelectedMessage: selectedMsg)
         }
         
-        selectedMsg.removeRecipient(user: currentUser.uid)
+//        selectedMsg.removeRecipient(user: currentUser.uid)
         
         
     }

@@ -146,9 +146,54 @@ extension Message {
         
         })
         
+    }
+    
+    func removeMediaFileFromFirebaseStorage() {
+        
+        let ref = FIRStorage.storage().reference(forURL: self.mediaURL)
+        
+        ref.delete { (error) in
+            
+            if error != nil {
+                print("===NAG=== Error Deleting File from Firebase Storage \(error?.localizedDescription)")
+            }
+            
+            
+        }
+
+        
+    }
+    
+    
+    func removeImageFromFirebaseStorage(forURLString URLString: String) {
+        
+        FIRImage.removeImage(forUrl: URLString, completion: { error in
+            
+            if error != nil {
+                print("===NAG=== Error Deleting Image from Firebase Storage \(error?.localizedDescription)")
+            }
+        
+        
+        })
+        
         
         
     }
+    
+    func removeVideoFromFirebaseStorage(forURLString URLString: String) {
+        
+        FIRVideo.removeVideo(forUrl: URLString, completion: { error in
+            
+            if error != nil {
+                print("===NAG=== Error Deleting Video from Firebase Storage \(error?.localizedDescription)")
+            }
+            
+            
+        })
+        
+    }
+
+    
     
     class func observeMessages(_ completion: @escaping ([Message]) -> Void) {
         
@@ -198,6 +243,14 @@ extension Message {
         // If there're more than one recipient - delete just passed recipient
         
         if self.recipients.count == 1 {
+            
+//            if self.type == "image" {
+//                
+//                removeImageFromFirebaseStorage(forURLString: self.mediaURL)
+//            } else {
+//                removeVideoFromFirebaseStorage(forURLString: self.mediaURL)
+//            }
+            removeMediaFileFromFirebaseStorage()
             
             messageRef.removeValue()
             
