@@ -169,23 +169,17 @@ extension Message {
                         
                     }
                     
-                    
                 }
                 completion(receivedMessages)
                 
             }
             
-        
-        
         })
-        
         
     }
     
     
     class func observeNewMessage(_ completion: @escaping (Message) -> Void) {
-        
-
         
         DataService.instance.REF_MESSAGES.queryOrdered(byChild: "createdTime").observe(.childAdded, with: { snapshot in
             
@@ -193,8 +187,6 @@ extension Message {
             
             completion(msg)
 
-        
-        
         })
         
     }
@@ -217,14 +209,8 @@ extension Message {
             
             messageRef.child("\(RECIPIENTS_REF)/\(user)").removeValue()
         }
-        
-        
-        
-        
-        
+   
     }
-    
-    
     
 }
 
