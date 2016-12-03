@@ -47,7 +47,11 @@ class MediaPickerHelper: NSObject {
             
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+        action in
+            self.completion(nil)
+        
+        })
         
         actionSheet.addAction(cameraAction)
         actionSheet.addAction(photosLibraryAction)

@@ -48,7 +48,8 @@ class NewMessageTableViewController: FriendsTableViewController {
             } else if let snapshotImage = mediaObject as? UIImage {
                 self.image = snapshotImage
             } else {
-                self.tabBarController?.selectedIndex = 0
+                self.cancel()
+//                self.tabBarController?.selectedIndex = 0
             }
             
             
@@ -63,6 +64,7 @@ class NewMessageTableViewController: FriendsTableViewController {
     @IBAction func cancel() {
         
         recipients.removeAll()
+        users.removeAll()
         image = nil
         videoURL = nil
         self.tableView.reloadData()
@@ -102,7 +104,6 @@ class NewMessageTableViewController: FriendsTableViewController {
                 
                 if let url = downloadURL {
                     
-//                    self.postMessage(withVideoURL: url)
                     self.postMessage(withMediaURLString: url, andMediaType: .Video)
 
                 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1824EBD31DF0B37B008876E8 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */; };
 		1824EBD51DF0C190008876E8 /* PhotoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824EBD41DF0C190008876E8 /* PhotoViewController2.swift */; };
+		183406B31DF306D00048B164 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 183406B11DF306D00048B164 /* NSDate+Utilities.m */; };
 		18491F031DEDF21400103725 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18491F021DEDF21400103725 /* AppDelegate.swift */; };
 		18491F081DEDF21400103725 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18491F061DEDF21400103725 /* Main.storyboard */; };
 		18491F0A1DEDF21400103725 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18491F091DEDF21400103725 /* Assets.xcassets */; };
@@ -37,6 +38,9 @@
 /* Begin PBXFileReference section */
 		1824EBD21DF0B37B008876E8 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		1824EBD41DF0C190008876E8 /* PhotoViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController2.swift; sourceTree = "<group>"; };
+		183406AD1DF306C00048B164 /* SnappyChatty-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SnappyChatty-Bridging-Header.h"; sourceTree = "<group>"; };
+		183406B11DF306D00048B164 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
+		183406B21DF306D00048B164 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		18491EFF1DEDF21400103725 /* SnappyChatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnappyChatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18491F021DEDF21400103725 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18491F071DEDF21400103725 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183406B41DF306D90048B164 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				183406B11DF306D00048B164 /* NSDate+Utilities.m */,
+				183406B21DF306D00048B164 /* NSDate+Utilities.h */,
+				183406AD1DF306C00048B164 /* SnappyChatty-Bridging-Header.h */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		18491EF61DEDF21400103725 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +116,7 @@
 			children = (
 				18C459411DF0459F00E40FEA /* SnappyChatty.entitlements */,
 				18491F021DEDF21400103725 /* AppDelegate.swift */,
+				183406B41DF306D90048B164 /* Extensions */,
 				18A2C7111DEE1502000DD6B6 /* Services */,
 				18A2C7001DEE014A000DD6B6 /* Helper Classes */,
 				18A2C7121DEE150E000DD6B6 /* Model */,
@@ -231,6 +246,7 @@
 					18491EFE1DEDF21400103725 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 358V8FBM3U;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -338,6 +354,7 @@
 				18C459431DF046BC00E40FEA /* NewMessageTableViewController.swift in Sources */,
 				18A2C70C1DEE059C000DD6B6 /* User.swift in Sources */,
 				1824EBD51DF0C190008876E8 /* PhotoViewController2.swift in Sources */,
+				183406B31DF306D00048B164 /* NSDate+Utilities.m in Sources */,
 				18A2C6FD1DEDFF9D000DD6B6 /* InboxViewController.swift in Sources */,
 				18A2C7101DEE0952000DD6B6 /* AuthService.swift in Sources */,
 				18491F031DEDF21400103725 /* AppDelegate.swift in Sources */,
@@ -468,12 +485,15 @@
 			baseConfigurationReference = 64606941F53D4CBC3C3CC92D /* Pods-SnappyChatty.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SnappyChatty/SnappyChatty.entitlements;
 				DEVELOPMENT_TEAM = 358V8FBM3U;
 				INFOPLIST_FILE = SnappyChatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antonnovoselov.SnappyChatty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnappyChatty/SnappyChatty-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -483,12 +503,14 @@
 			baseConfigurationReference = EC152AE8F10872D8B67E3313 /* Pods-SnappyChatty.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SnappyChatty/SnappyChatty.entitlements;
 				DEVELOPMENT_TEAM = 358V8FBM3U;
 				INFOPLIST_FILE = SnappyChatty/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antonnovoselov.SnappyChatty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SnappyChatty/SnappyChatty-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -137,6 +137,31 @@ class InboxViewController: UITableViewController {
     }
 
     
+    func clearFriendsAndRecipientsLists() {
+        
+        let ad = UIApplication.shared.delegate as! AppDelegate
+        let tabBarController = ad.window?.rootViewController as! UITabBarController
+        let firstNavVC = tabBarController.viewControllers?.first as! UINavigationController
+        let secondNavVC = tabBarController.viewControllers?[1] as! UINavigationController
+        let thirdNavVC = tabBarController.viewControllers?[2] as! UINavigationController
+
+        let inboxVC = firstNavVC.topViewController as! InboxViewController
+        let newMsgVC = secondNavVC.topViewController as! NewMessageTableViewController
+        let friendsVC = thirdNavVC.topViewController as! FriendsTableViewController
+        
+        inboxVC.messages = []
+        inboxVC.tableView.reloadData()
+        
+        newMsgVC.users = []
+        newMsgVC.recipients = [:]
+        newMsgVC.tableView.reloadData()
+        
+        friendsVC.users = []
+        friendsVC.selectedUsers = [:]
+        friendsVC.tableView.reloadData()
+        
+    }
+    
     
     
     // MARK: - Actions
@@ -144,6 +169,8 @@ class InboxViewController: UITableViewController {
     @IBAction func actionLogoutTapped() {
     
         try! FIRAuth.auth()?.signOut()
+        
+        clearFriendsAndRecipientsLists()
         
         performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
 

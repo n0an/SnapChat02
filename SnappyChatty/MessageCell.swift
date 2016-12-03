@@ -25,7 +25,14 @@ class MessageCell: UITableViewCell {
         self.userFullNameLabel.text = message.createdByUsername
         self.messageTypeLabel.text = message.type
         
-        self.timestampLabel.text = "Today"
+//        let createdAt = (String)(message.createdTime)
+        
+        let timeInterval = TimeInterval(message.createdTime / 1000)
+        
+        let createdDate = NSDate(timeIntervalSince1970: timeInterval)
+        
+        
+        self.timestampLabel.text = createdDate.stringFromDate()
         
         
     }
@@ -34,3 +41,40 @@ class MessageCell: UITableViewCell {
     
 
 }
+
+
+
+fileprivate extension NSDate {
+    func stringFromDate() -> String {
+        let interval = NSDate().days(after: self as Date!)
+        var dateString = ""
+        
+        if interval == 0 {
+            dateString = "Today"
+        } else if interval == 1 {
+            dateString = "Yesterday"
+        } else if interval > 1 {
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "mm/dd/yyyy"
+            dateString = dateFormat.string(from: self as Date)
+        }
+        
+        return dateString
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
