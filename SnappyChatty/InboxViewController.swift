@@ -32,21 +32,10 @@ class InboxViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Check remove video flag. If set to true - remove recipient for message
-        if toRemoveRecipient == true {
-            toRemoveRecipient = false
-            self.selectedMsg.removeRecipient(user: currentUser.uid)
-        }
-        
         // check if the user logged in or not
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                DataService.instance.REF_USERS.child(user.uid).observe(.value, with: { (snapshot) in
+                DataService.instance.REF_USERS.child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                     if let userDict = snapshot.value as? [String: Any] {
                         self.currentUser = User(uid: user.uid, dictionary: userDict)
                         print("===NAG===: currentUser = \(self.currentUser?.username)")
@@ -61,6 +50,18 @@ class InboxViewController: UITableViewController {
                 self.performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
             }
         })
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check remove video flag. If set to true - remove recipient for message
+        if toRemoveRecipient == true {
+            toRemoveRecipient = false
+            self.selectedMsg.removeRecipient(user: currentUser.uid)
+        }
+        
     }
     
     // MARK: - HELPER METHODS
