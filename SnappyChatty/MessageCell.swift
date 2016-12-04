@@ -11,39 +11,27 @@ import Firebase
 
 class MessageCell: UITableViewCell {
     
+    // MARK: - OUTLETS
     @IBOutlet weak var userFullNameLabel: UILabel!
     @IBOutlet weak var messageTypeLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
+    // MARK: - HELPER METHODS
     func configureCell(message: Message) {
-        
         self.userFullNameLabel.text = message.createdByUsername
         self.messageTypeLabel.text = message.type
-        
-//        let createdAt = (String)(message.createdTime)
-        
         let timeInterval = TimeInterval(message.createdTime / 1000)
-        
         let createdDate = NSDate(timeIntervalSince1970: timeInterval)
-        
-        
         self.timestampLabel.text = createdDate.stringFromDate()
-        
-        
     }
-    
-    
-    
-
 }
 
-
-
+// MARK: - NSDATE EXTENSION
 fileprivate extension NSDate {
     func stringFromDate() -> String {
         let interval = NSDate().days(after: self as Date!)
@@ -58,23 +46,8 @@ fileprivate extension NSDate {
             dateFormat.dateFormat = "dd/MM/yyyy"
             dateString = dateFormat.string(from: self as Date)
         }
-        
         return dateString
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

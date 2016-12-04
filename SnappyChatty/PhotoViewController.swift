@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
-    // MARK: - Public API
+    // MARK: - PROPERTIES
     var image: UIImage!
     var message: Message!
     var senderName: String!
@@ -73,7 +73,6 @@ class PhotoViewController: UIViewController {
         
     }
     
-    
     // after the rotation
     
     override func viewWillLayoutSubviews() {
@@ -86,8 +85,6 @@ class PhotoViewController: UIViewController {
         
         recenterImage()
     }
-    
-    
 }
 
 extension PhotoViewController : UIScrollViewDelegate {

@@ -11,45 +11,20 @@ import Firebase
 
 class FIRVideo {
     
+    // MARK: - PROPERTIES
     var videoURL: URL
     
+    // MARK: - INITIALILZERS
     init(videoURL: URL) {
         self.videoURL = videoURL
     }
     
+    // MARK: - SAVE METHOD
     func saveToFirebaseStorage(completion: @escaping (FIRStorageMetadata?, Error?) -> Void) {
-        
         let videoUid = NSUUID().uuidString
-        
         let ref = StorageService.instance.REF_STORAGE_VIDEOS.child(videoUid)
-        
         ref.putFile(self.videoURL, metadata: nil, completion: { meta, error in
-
             completion(meta, error)
-            
         })
-        
     }
-    
-    
-}
-
-extension FIRVideo {
-    
-    class func removeVideo(forUrl url: String, completion: @escaping (Error?) -> Void) {
-        
-        let ref = FIRStorage.storage().reference(forURL: url)
-        
-        ref.delete { (error) in
-            
-            completion(error)
-            
-            
-        }
-        
-        
-    }
-    
-    
-    
 }

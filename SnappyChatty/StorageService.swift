@@ -9,14 +9,22 @@
 import Foundation
 import Firebase
 
-let STORAGE_ROOT =  FIRStorage.storage().reference()
+let STORAGE_ROOT    = FIRStorage.storage().reference()
+let IMAGES_REF      = "images"
+let VIDEOS_REF      = "videos"
+
 
 class StorageService {
     
-    static let instance = StorageService()
+    private static let _instance = StorageService()
     
-    var REF_STORAGE_IMAGES = STORAGE_ROOT.child("images")
-    var REF_STORAGE_VIDEOS = STORAGE_ROOT.child("videos")
+    static var instance: StorageService {
+        return _instance
+    }
+    
+    // MARK: - PUBLIC PROPERTIES
+    var REF_STORAGE_IMAGES = STORAGE_ROOT.child(IMAGES_REF)
+    var REF_STORAGE_VIDEOS = STORAGE_ROOT.child(VIDEOS_REF)
     
     
 }

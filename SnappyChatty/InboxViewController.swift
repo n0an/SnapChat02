@@ -13,77 +13,58 @@ import AVKit
 
 class InboxViewController: UITableViewController {
     
-    var currentUser: User!
-    
-    var messages = [Message]()
-    
-    var selectedMsg: Message!
-    
-    var toRemoveRecipient: Bool = false
-    
+    // MARK: - PROPERTIES
     struct Storyboard {
         static let segueLogin = "ShowWelcomeViewController"
         static let seguePhotoDisplayer = "Show Photo"
         static let cellID = "Message Cell"
-
+    }
+    
+    var currentUser: User!
+    var messages = [Message]()
+    var selectedMsg: Message!
+    
+    // Flag to remove video file from Firebase Storage after have seen by AVPlayer
+    var toRemoveRecipient: Bool = false
+    
+    
+    // MARK: - viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Check remove video flag. If set to true - remove recipient for message
         if toRemoveRecipient == true {
-            
             toRemoveRecipient = false
-            
             self.selectedMsg.removeRecipient(user: currentUser.uid)
-            
-            
         }
         
         // check if the user logged in or not
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                // signed in
-                
                 DataService.instance.REF_USERS.child(user.uid).observe(.value, with: { (snapshot) in
-                    
                     if let userDict = snapshot.value as? [String: Any] {
-                        
                         self.currentUser = User(uid: user.uid, dictionary: userDict)
-                        
                         print("===NAG===: currentUser = \(self.currentUser?.username)")
                         
                         AuthService.instance.currentUser = self.currentUser
                         
-                        // §§ Fetch Messages
-                        
                         self.fetchMessages()
-                        
                     }
-                    
                 })
-                
                 
             } else {
                 self.performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
             }
         })
-        
-        
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-    }
-    
-    // MARK: - Helper Methods
-    
+    // MARK: - HELPER METHODS
     func fetchMessages() {
-        
         self.messages = []
         
         Message.observeMessages { (fetchedMessages) in
@@ -99,20 +80,16 @@ class InboxViewController: UITableViewController {
             
         }
         
-        
-        
-        
-//        Message.observeNewMessage { (messages) in
-//            
-//            
-//            
-//            
-////            if message.recipients.contains(self.currentUser.uid) && !self.messages.contains(message) {
-////                self.messages.insert(message, at: 0)
-////                self.tableView.reloadData()
-////            }
-//        
-//        }
+        // ** ALTERNATIVE - OBSERVE ONLY NEW MESSAGE IN DATABASE
+        /*
+         Message.observeNewMessage { (message) in
+         
+         if message.recipients.contains(self.currentUser.uid) && !self.messages.contains(message) {
+         self.messages.insert(message, at: 0)
+         self.tableView.reloadData()
+         }
+         }
+         */
         
     }
     
@@ -138,42 +115,28 @@ class InboxViewController: UITableViewController {
                 self.selectedMsg.removeRecipient(user: self.currentUser.uid)
                 
             } else {
-                
                 GeneralHelper.sharedHelper.showAlertOnViewController(viewController: self, withTitle: "Error", message: error!.localizedDescription, buttonTitle: "OK")
             }
         })
     }
     
-    
     func playVideo(fromSelectedMessage message: Message) {
         
         let videoURL = URL(string: message.mediaURL)
-        
         let player = AVPlayer(url: videoURL!)
-        
         let playerVC = AVPlayerViewController()
         
         playerVC.player = player
-        
         self.selectedMsg = message
-        
         
         self.present(playerVC, animated: true, completion: {
             playerVC.player?.play()
             
             self.toRemoveRecipient = true
-            
-        
         })
-        
-        
-        
-        
-        
-        
     }
-
     
+    // Method to clear lists in all VCs to refresh them for new user login
     func clearFriendsAndRecipientsLists() {
         
         let ad = UIApplication.shared.delegate as! AppDelegate
@@ -181,7 +144,7 @@ class InboxViewController: UITableViewController {
         let firstNavVC = tabBarController.viewControllers?.first as! UINavigationController
         let secondNavVC = tabBarController.viewControllers?[1] as! UINavigationController
         let thirdNavVC = tabBarController.viewControllers?[2] as! UINavigationController
-
+        
         let inboxVC = firstNavVC.topViewController as! InboxViewController
         let newMsgVC = secondNavVC.topViewController as! NewMessageTableViewController
         let friendsVC = thirdNavVC.topViewController as! FriendsTableViewController
@@ -200,49 +163,35 @@ class InboxViewController: UITableViewController {
     }
     
     
-    
-    // MARK: - Actions
-    
+    // MARK: - ACTIONS
     @IBAction func actionLogoutTapped() {
-    
         try! FIRAuth.auth()?.signOut()
-        
         clearFriendsAndRecipientsLists()
-        
         performSegue(withIdentifier: Storyboard.segueLogin, sender: nil)
-
     }
     
     @IBAction func refreshControlValueChanged() {
         fetchMessages()
-        
         self.fetchMessages()
-
     }
     
     
     // MARK: - Navigation
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Storyboard.seguePhotoDisplayer {
             let destinationVC = segue.destination as! PhotoViewController
             
             destinationVC.hidesBottomBarWhenPushed = true
             
-            
             let sendImg = sender as! UIImage
             
             destinationVC.message = selectedMsg
             destinationVC.image = sendImg
-      
-            
         }
     }
     
     
     // MARK: - UITableViewDataSource
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -250,57 +199,30 @@ class InboxViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.messages.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let messageCell = tableView.dequeueReusableCell(withIdentifier: Storyboard.cellID, for: indexPath) as! MessageCell
-        
         let message = self.messages[indexPath.row]
-        
         messageCell.configureCell(message: message)
-        
         return messageCell
-        
     }
     
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         let selectedMsg = self.messages[indexPath.row]
         
         if selectedMsg.type == "image" {
-            
             self.downloadImage(forSelectedMessage: selectedMsg)
-            
         } else if selectedMsg.type == "video" {
             self.playVideo(fromSelectedMessage: selectedMsg)
         }
         
-//        selectedMsg.removeRecipient(user: currentUser.uid)
-        
-        
     }
     
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

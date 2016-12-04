@@ -9,18 +9,18 @@
 import Foundation
 import Firebase
 
-
 class FIRImage {
     
+    // MARK: - PROPERTIES
     var image: UIImage
-//    var downloadURL: URL?
-//    var downloadLink: String!
     var ref: FIRStorageReference!
     
+    // MARK: - INITIALIZERS
     init(image: UIImage) {
         self.image = image
     }
     
+    // MARK: - SAVE METHOD
     func saveToFirebaseStorage(completion: @escaping (FIRStorageMetadata?, Error?) -> Void) {
         
         let imageUid = NSUUID().uuidString
@@ -31,18 +31,13 @@ class FIRImage {
         ref = StorageService.instance.REF_STORAGE_IMAGES.child(imageUid)
         
         ref.put(imageData!, metadata: nil, completion: { (meta, error) in
-        
             completion(meta, error)
-        
         })
-        
-        
-        
-        
     }
-    
 }
 
+
+// MARK: - Class function - Download Image from Storage for URL specified
 extension FIRImage {
     
     class func downloadImage(forUrl url: String, completion: @escaping (UIImage?, Error?) -> Void) {
@@ -65,54 +60,28 @@ extension FIRImage {
                     completion(nil, error)
                 }
             }
-            
-        
         })
-        
-        
     }
-    
-    
-    class func removeImage(forUrl url: String, completion: @escaping (Error?) -> Void) {
-        
-        let ref = FIRStorage.storage().reference(forURL: url)
-        
-        ref.delete { (error) in
-            
-            completion(error)
-            
-            
-        }
-        
-        
-    }
-    
 }
 
 
+// MARK: - HELPER METHODS
 private extension UIImage {
     
     func resized() -> UIImage {
         let height: CGFloat = 800.0
         let ratio = self.size.width / self.size.height
-        
         let width = height * ratio
-        
         let newSize = CGSize(width: width, height: height)
         
         let newRectangle = CGRect(x: 0, y: 0, width: width, height: height)
         
         UIGraphicsBeginImageContext(newSize)
-        
         self.draw(in: newRectangle)
-        
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
-        
         return resizedImage!
     }
-    
 }
 
 
